@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+
+  ghost:
+    image: ghost:latest
+    restart: always
+    ports:
+      - 8092:2368
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: XXXXX
+      WORDPRESS_DB_PASSWORD: XXXXXXXXXXXX
+      WORDPRESS_DB_NAME: ghost
+    volumes:
+      - /Desktop/Ghost:/var/www/html
+
+  db:
+    image: yobasystems/alpine-mariadb:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: ghost
+      MYSQL_USER: XXXXX
+      MYSQL_PASSWORD: XXXXXXXXXXXX
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - /Desktop/Ghost:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
